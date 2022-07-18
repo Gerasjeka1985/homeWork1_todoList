@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import AddTaskbutton from "./components/addTaskbutton.vue";
+import Task from "./components/Task.vue";
 </script>
 
 <template>
