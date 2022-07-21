@@ -2,10 +2,12 @@
 import AddTaskbutton from "./components/addTaskbutton.vue";
 import Task from "./components/Task.vue";
 import { useTaskerStore } from "@/stores/tasker";
-import { computed } from "@vue/reactivity";
+import { computed, ref } from "@vue/reactivity";
 const store = useTaskerStore();
 
 const listOfTasks = computed(() => store.actions);
+
+const chek = ref(false);
 </script>
 
 <template>
@@ -19,7 +21,7 @@ const listOfTasks = computed(() => store.actions);
     <div v-if="listOfTasks.length > 0" class="task-list">
       <ul>
         <li v-for="(action, index) in listOfTasks" :key="listOfTasks[index]">
-          <Task>{{ listOfTasks[index] }} {{ index + 1 }}</Task>
+          <Task v-model="chek"> {{ listOfTasks[index] }} {{ index }} </Task>
         </li>
       </ul>
     </div>

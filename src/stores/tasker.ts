@@ -2,7 +2,6 @@ import { defineStore } from 'pinia'
 
 interface State {
   listOfTasks: string[];
-  taskNumber: Number
 }
 
 export const useTaskerStore = defineStore({
@@ -10,10 +9,10 @@ export const useTaskerStore = defineStore({
   state: function(){
     return{
       listOfTasks: [],
-      taskNumber:0
     } as State
   },
   getters: {
+    //filter  здесь
     actions: (state) => state.listOfTasks 
   },
   actions: {

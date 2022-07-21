@@ -1,22 +1,18 @@
 <script setup lang="ts">
 import { computed } from "vue";
 
-//задаем значине для флага false
 const props = defineProps<{
-  //эта строка позволит при добавлении новый задач в стор не терять булевое значение
-  checkbox: Boolean;
+  modelValue?: true | false;
 }>();
 
-const emit = defineEmits(["update: checkValue"]);
+const emit = defineEmits(["update:modelValue"]);
 
-// По checkValue будет определять завершено дело или нет
-//Можно попробовать через v-if/ v-else
-const checkValue = computed({
+const check = computed({
   get() {
-    return props.checkbox;
+    return props.modelValue;
   },
-  set(value?: Boolean) {
-    emit("update: checkValue", value);
+  set(value?: true | false) {
+    emit("update:modelValue", value);
   },
 });
 </script>
@@ -25,8 +21,8 @@ const checkValue = computed({
   <div class="task-container">
     <div class="task-item">
       <slot></slot>
-      <div v-if="checkbox">Задача завершена</div>
-      <input type="checkbox" v-model="checkbox" />
+      <input type="checkbox" v-model="check" />
+      <div v-if="modelValue">Задача завершена</div>
     </div>
   </div>
 </template>

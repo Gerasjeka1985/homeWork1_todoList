@@ -1,5 +1,5 @@
 <template>
-  <button @click="$emit('addTask')"><slot></slot></button>
+  <button><slot></slot></button>
 </template>
 
 <style scoped>
