@@ -1,18 +1,37 @@
 <script setup lang="ts">
+import { computed } from "vue";
+
+//задаем значине для флага false
 const props = defineProps<{
-  isDone: Boolean;
+  checkbox: false;
 }>();
+
+const emit = defineEmits(["update: checkValue"]);
+
+// По checkValue будет определять завершено дело или нет
+//Можно попробовать через v-if/ v-else
+const checkValue = computed({
+  get() {
+    return props.checkbox;
+  },
+  set(value?: Boolean) {
+    emit("update: checkValue", value);
+  },
+});
 </script>
 
 <template>
-  <div class="task-item">
-    <slot></slot>
+  <div class="task-container">
+    <div class="task-item">
+      <slot></slot>
+      <input type="checkbox" v-model="checkbox" />
+    </div>
   </div>
 </template>
 
 <style>
 .task-item {
-  margin-top: 100px;
+  margin-top: 10px;
   margin-left: 20px;
   width: 40%;
   height: 40px;

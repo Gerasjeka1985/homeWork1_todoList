@@ -1,6 +1,11 @@
 <script setup lang="ts">
 import AddTaskbutton from "./components/addTaskbutton.vue";
 import Task from "./components/Task.vue";
+import { useTaskerStore } from "@/stores/tasker";
+import { computed } from "@vue/reactivity";
+const store = useTaskerStore();
+
+const listOfTasks = computed(() => store.actions);
 </script>
 
 <template>
@@ -10,7 +15,15 @@ import Task from "./components/Task.vue";
     </div>
   </header>
   <main>
-    <AddTaskbutton>Добавить Задачу</AddTaskbutton>
+    <AddTaskbutton @click="store.addTask">Добавить Задачу</AddTaskbutton>
+    <div v-if="listOfTasks.length > 0" class="task-list">
+      <ul>
+        <li v-for="(action, index) in listOfTasks" :key="listOfTasks[index]">
+          <Task>{{ listOfTasks[index] }} {{ index + 1 }}</Task>
+        </li>
+      </ul>
+    </div>
+    <div v-else class="noElems">Задач нет</div>
   </main>
 </template>
 
