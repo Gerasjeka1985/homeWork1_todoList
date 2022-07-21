@@ -23,7 +23,9 @@ const listOfTasks = computed(() => store.actions);
         </li>
       </ul>
     </div>
-    <div v-else class="noElems">Задач нет</div>
+    <div v-else class="noElems">
+      <h3>Still no tasks here</h3>
+    </div>
   </main>
 </template>
 
@@ -41,5 +43,14 @@ const listOfTasks = computed(() => store.actions);
   justify-content: flex-start;
   align-items: center;
   margin-left: 20px;
+}
+
+.noElems {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.noElems h3 {
+  color: rgb(100, 14, 14);
 }
 </style>

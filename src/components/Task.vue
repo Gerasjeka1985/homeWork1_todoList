@@ -3,7 +3,8 @@ import { computed } from "vue";
 
 //задаем значине для флага false
 const props = defineProps<{
-  checkbox: false;
+  //эта строка позволит при добавлении новый задач в стор не терять булевое значение
+  checkbox: Boolean;
 }>();
 
 const emit = defineEmits(["update: checkValue"]);
@@ -24,6 +25,7 @@ const checkValue = computed({
   <div class="task-container">
     <div class="task-item">
       <slot></slot>
+      <div v-if="checkbox">Задача завершена</div>
       <input type="checkbox" v-model="checkbox" />
     </div>
   </div>
