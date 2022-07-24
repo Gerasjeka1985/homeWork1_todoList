@@ -27,7 +27,9 @@ function genKey() {
     <div v-if="listOfTasks.length > 0" class="task-list">
       <ul>
         <li v-for="elem in listOfTasks">
-          <Task v-model="elem.isChacked"> {{ elem.title }}</Task>
+          <Task v-model="elem.isChacked" :key="genKey()">
+            {{ elem.title }}</Task
+          >
         </li>
       </ul>
     </div>
