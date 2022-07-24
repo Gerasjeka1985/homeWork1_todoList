@@ -1,7 +1,14 @@
 import { defineStore } from 'pinia'
 
+
+
 interface State {
-  listOfTasks: string[];
+  listOfTasks: Elem[]
+}
+
+interface Elem {
+  title:string,
+  isChacked:boolean
 }
 
 export const useTaskerStore = defineStore({
@@ -12,12 +19,14 @@ export const useTaskerStore = defineStore({
     } as State
   },
   getters: {
-    //filter  здесь
-    actions: (state) => state.listOfTasks 
+    actions: (state) => state.listOfTasks.sort()
   },
   actions: {
-    addTask() {
-      this.listOfTasks.push(`Задача`)
+    addTask(n:number) {
+      this.listOfTasks.push({
+        title: `Задача ${n}`,
+        isChacked: false
+      })
   }
   }
 })

@@ -2,12 +2,18 @@
 import AddTaskbutton from "./components/addTaskbutton.vue";
 import Task from "./components/Task.vue";
 import { useTaskerStore } from "@/stores/tasker";
-import { computed, ref } from "@vue/reactivity";
+import { computed } from "@vue/reactivity";
 const store = useTaskerStore();
+//счетчик задач
+const n = 1;
 
 const listOfTasks = computed(() => store.actions);
 
-const chek = ref(false);
+//для генерирования случайного и не повторяющегося key
+function genKey() {
+  let key = `azv-${Math.random() * (2 - 1) + 1}`;
+  return key;
+}
 </script>
 
 <template>
@@ -17,13 +23,11 @@ const chek = ref(false);
     </div>
   </header>
   <main>
-    <AddTaskbutton @click="store.addTask">Добавить Задачу</AddTaskbutton>
+    <AddTaskbutton @click="store.addTask(n++)">Добавить Задачу</AddTaskbutton>
     <div v-if="listOfTasks.length > 0" class="task-list">
-      <ul>
-        <li v-for="(action, index) in listOfTasks" :key="listOfTasks[index]">
-          <Task v-model="chek"> {{ listOfTasks[index] }} {{ index }} </Task>
-        </li>
-      </ul>
+      <div v-for="elem in listOfTasks">
+        <Task v-model="elem.isChacked"> {{ elem.title }}</Task>
+      </div>
     </div>
     <div v-else class="noElems">
       <h3>Still no tasks here</h3>

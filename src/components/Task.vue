@@ -2,7 +2,7 @@
 import { computed } from "vue";
 
 const props = defineProps<{
-  modelValue?: true | false;
+  modelValue?: boolean;
 }>();
 
 const emit = defineEmits(["update:modelValue"]);
@@ -11,19 +11,17 @@ const check = computed({
   get() {
     return props.modelValue;
   },
-  set(value?: true | false) {
+  set(value?: boolean) {
     emit("update:modelValue", value);
   },
 });
 </script>
 
 <template>
-  <div class="task-container">
-    <div class="task-item">
-      <slot></slot>
-      <input type="checkbox" v-model="check" />
-      <div v-if="modelValue">Задача завершена</div>
-    </div>
+  <div class="task-item">
+    <slot></slot>
+    <input type="checkbox" v-model="check" />
+    <div v-if="modelValue">Задача завершена</div>
   </div>
 </template>
 
