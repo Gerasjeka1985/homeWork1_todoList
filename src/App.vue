@@ -7,7 +7,7 @@ const store = useTaskerStore();
 //счетчик задач
 const n = 1;
 
-const listOfTasks = computed(() => store.actions);
+const listOfTasks = computed(() => store.getState);
 
 //для генерирования случайного и не повторяющегося key
 function genKey() {
@@ -25,9 +25,11 @@ function genKey() {
   <main>
     <AddTaskbutton @click="store.addTask(n++)">Добавить Задачу</AddTaskbutton>
     <div v-if="listOfTasks.length > 0" class="task-list">
-      <div v-for="elem in listOfTasks">
-        <Task v-model="elem.isChacked"> {{ elem.title }}</Task>
-      </div>
+      <ul>
+        <li v-for="elem in listOfTasks">
+          <Task v-model="elem.isChacked"> {{ elem.title }}</Task>
+        </li>
+      </ul>
     </div>
     <div v-else class="noElems">
       <h3>Still no tasks here</h3>

@@ -1,14 +1,12 @@
 import { defineStore } from 'pinia'
 
-
-
-interface State {
-  listOfTasks: Elem[]
-}
-
 interface Elem {
   title:string,
   isChacked:boolean
+}
+
+interface State {
+  listOfTasks: Elem[]
 }
 
 export const useTaskerStore = defineStore({
@@ -19,7 +17,17 @@ export const useTaskerStore = defineStore({
     } as State
   },
   getters: {
-    actions: (state) => state.listOfTasks.sort()
+    getState: (state) => state.listOfTasks.sort((prev,next)=>{
+      if(prev["isChacked"] < next["isChacked"]){
+        return -1
+      }
+      else if(prev["isChacked"] > next["isChacked"]){
+        return 1
+      }
+      else{
+        return 0
+      }
+    })
   },
   actions: {
     addTask(n:number) {
